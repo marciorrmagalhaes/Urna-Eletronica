@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apuração de Votos</title>
+    <link rel="stylesheet" href="admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="admin-container">
+        <header class="admin-header">
+            <h1>📊 Apuração em Tempo Real</h1>
+            <nav>
+                <a href="index.html" class="nav-link">Ir para Urna</a>
+                <a href="admin.html" class="nav-link">Administração</a>
+            </nav>
+        </header>
+
+        <main class="admin-content" style="grid-template-columns: 1fr;" id="apuracao-container">
+            <!-- Gráficos de apuração serão gerados aqui dinamicamente -->
+            <div style="text-align: center; padding: 3rem;">
+                <p>Carregando resultados da votação...</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Firebase SDKs (Versão Compatível) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    
+    <!-- Configuração e Lógica -->
+    <script src="firebase-config.js"></script>
+    <script src="apuracao.js"></script>
+</body>
+</html>

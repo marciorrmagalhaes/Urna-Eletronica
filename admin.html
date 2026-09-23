@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin - Urna Eletrônica</title>
+    <link rel="stylesheet" href="admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="admin-container">
+        <header class="admin-header">
+            <h1>⚙️ Administração da Votação</h1>
+            <nav>
+                <a href="index.html" class="nav-link">Ir para Urna</a>
+                <a href="apuracao.html" class="nav-link">Ver Apuração</a>
+            </nav>
+        </header>
+
+        <main class="admin-content">
+            <section class="admin-section">
+                <h2>1. Cadastrar Categoria</h2>
+                <form id="form-categoria" class="admin-form">
+                    <div class="form-group">
+                        <label for="titulo-categoria">Título da Categoria</label>
+                        <input type="text" id="titulo-categoria" placeholder="Ex: Melhor Projeto de TI" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="digitos-categoria">Quantidade de Dígitos (ex: 2)</label>
+                        <input type="number" id="digitos-categoria" min="1" max="5" value="2" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Salvar Categoria</button>
+                </form>
+                
+                <div class="list-container">
+                    <h3>Categorias Cadastradas</h3>
+                    <ul id="lista-categorias" class="item-list">
+                        <!-- Categorias aparecerão aqui -->
+                    </ul>
+                </div>
+            </section>
+
+            <section class="admin-section">
+                <h2>2. Cadastrar Candidato / Projeto</h2>
+                <form id="form-candidato" class="admin-form">
+                    <div class="form-group">
+                        <label for="select-categoria">Selecione a Categoria</label>
+                        <select id="select-categoria" required>
+                            <option value="" disabled selected>Escolha uma categoria primeiro...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="numero-candidato">Número</label>
+                        <input type="text" id="numero-candidato" placeholder="Ex: 15" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nome-candidato">Nome do Projeto/Candidato</label>
+                        <input type="text" id="nome-candidato" placeholder="Ex: Projeto Inovação" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="departamento-candidato">Departamento / Equipe (Opcional)</label>
+                        <input type="text" id="departamento-candidato" placeholder="Ex: TI">
+                    </div>
+                    <div class="form-group">
+                        <label for="imagem-candidato">URL da Imagem (Opcional)</label>
+                        <input type="text" id="imagem-candidato" placeholder="Ex: imagem/foto.jpg" value="imagem/1.jpg">
+                    </div>
+                    <button type="submit" class="btn-primary">Salvar Candidato</button>
+                </form>
+
+                <div class="list-container">
+                    <h3>Candidatos Cadastrados</h3>
+                    <ul id="lista-candidatos" class="item-list">
+                        <!-- Candidatos aparecerão aqui -->
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Firebase SDKs (Versão Compatível) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    
+    <!-- Configuração e Lógica -->
+    <script src="firebase-config.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
