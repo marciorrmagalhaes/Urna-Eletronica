@@ -13,39 +13,18 @@ let aviso = document.querySelector('.d-2');
 let lateral = document.querySelector('.d-1-right');
 let numeros = document.querySelector('.d-1-3');
 
-// Configuração de Som (Web Audio API)
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+// Configuração de Som (Arquivos MP3 Originais)
+let audioTecla = new Audio('SOM/se1.mp3');
+let audioConfirma = new Audio('SOM/se2.mp3');
 
 function tocarSomTecla() {
-    if(audioCtx.state === 'suspended') audioCtx.resume();
-    const osc = audioCtx.createOscillator();
-    const gainNode = audioCtx.createGain();
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(800, audioCtx.currentTime); // Tom da tecla
-    gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
-    osc.connect(gainNode);
-    gainNode.connect(audioCtx.destination);
-    osc.start();
-    osc.stop(audioCtx.currentTime + 0.1);
+    audioTecla.currentTime = 0; // Reinicia o áudio se já estiver tocando
+    audioTecla.play().catch(e => console.log('Áudio não iniciado: ', e));
 }
 
 function tocarSomFim() {
-    if(audioCtx.state === 'suspended') audioCtx.resume();
-    const osc = audioCtx.createOscillator();
-    const gainNode = audioCtx.createGain();
-    osc.type = 'square';
-    osc.frequency.setValueAtTime(400, audioCtx.currentTime); // Som mais grave
-    
-    // Simula aquele som longo de finalização da urna
-    gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
-    gainNode.gain.linearRampToValueAtTime(0.1, audioCtx.currentTime + 1.5);
-    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 2.0);
-    
-    osc.connect(gainNode);
-    gainNode.connect(audioCtx.destination);
-    osc.start();
-    osc.stop(audioCtx.currentTime + 2.0);
+    audioConfirma.currentTime = 0;
+    audioConfirma.play().catch(e => console.log('Áudio não iniciado: ', e));
 }
 
 
