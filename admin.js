@@ -57,7 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const li = document.createElement('li');
             li.innerHTML = `
                 <span><strong>${data.numero}</strong> - ${data.nome} (${data.partido})</span>
-                <button class="btn-delete" onclick="deletarCandidato('${doc.id}')">Excluir</button>
+                <div>
+                    <button class="btn-primary" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin-right: 5px; width: auto;" onclick="editarFotoCandidato('${doc.id}', '${data.fotos && data.fotos[0] ? data.fotos[0].url : ''}')">Editar Foto</button>
+                    <button class="btn-delete" onclick="deletarCandidato('${doc.id}')">Excluir</button>
+                </div>
             `;
             listaCandidatos.appendChild(li);
         });
@@ -107,5 +110,23 @@ window.deletarCategoria = async (id) => {
 window.deletarCandidato = async (id) => {
     if(confirm("Tem certeza que deseja excluir este candidato/projeto?")) {
         await db.collection("candidatos").doc(id).delete();
+    }
+};
+
+window.editarFotoCandidato = async (id, fotoAtual) => {
+    const novaFoto = prompt("Digite o novo caminho ou URL da foto:", fotoAtual);
+    
+    if (novaFoto !== null && novaFoto.trim() !== "") {
+        try {
+            await db.collection("candidatos").doc(id).update({
+                fotos: [
+                    { url: novaFoto.trim(), legenda: "Candidato", small: false }
+                ]
+            });
+            alert("Foto atualizada com sucesso!");
+        } catch (error) {
+            console.error("Erro ao atualizar foto: ", error);
+            alert("Erro ao atualizar a foto. Verifique o console.");
+        }
     }
 };
